@@ -1,0 +1,328 @@
+{
+    "title": "SchedulerManagementClient",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/scheduler/2016-03-01/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "JobCollections_ListBySubscription": {
+            "main": "./lib/actions/JobCollections_ListBySubscription.js",
+            "title": "Gets all job collections under specified subscription.",
+            "description": "Gets all job collections under specified subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/JobCollections_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "JobCollections_ListByResourceGroup": {
+            "main": "./lib/actions/JobCollections_ListByResourceGroup.js",
+            "title": "Gets all job collections under specified resource group.",
+            "description": "Gets all job collections under specified resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/JobCollections_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "JobCollections_Delete": {
+            "main": "./lib/actions/JobCollections_Delete.js",
+            "title": "Deletes a job collection.",
+            "description": "Deletes a job collection.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/JobCollections_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "JobCollections_Get": {
+            "main": "./lib/actions/JobCollections_Get.js",
+            "title": "Gets a job collection.",
+            "description": "Gets a job collection.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/JobCollections_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "JobCollections_Patch": {
+            "main": "./lib/actions/JobCollections_Patch.js",
+            "title": "Patches an existing job collection.",
+            "description": "Patches an existing job collection.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "body_content_type": {
+                    "viewClass": "SelectView",
+                    "label": "Body Content-Type",
+                    "required": true,
+                    "prompt": "Choose a body Content-Type.",
+                    "model": {
+                        "application/json": "application/json",
+                        "text/json": "text/json"
+                    }
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/JobCollections_Patch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "JobCollections_CreateOrUpdate": {
+            "main": "./lib/actions/JobCollections_CreateOrUpdate.js",
+            "title": "Provisions a new job collection or updates an existing job collection.",
+            "description": "Provisions a new job collection or updates an existing job collection.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "body_content_type": {
+                    "viewClass": "SelectView",
+                    "label": "Body Content-Type",
+                    "required": true,
+                    "prompt": "Choose a body Content-Type.",
+                    "model": {
+                        "application/json": "application/json",
+                        "text/json": "text/json"
+                    }
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/JobCollections_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "JobCollections_Disable": {
+            "main": "./lib/actions/JobCollections_Disable.js",
+            "title": "Disables all of the jobs in the job collection.",
+            "description": "Disables all of the jobs in the job collection.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/JobCollections_Disable.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "JobCollections_Enable": {
+            "main": "./lib/actions/JobCollections_Enable.js",
+            "title": "Enables all of the jobs in the job collection.",
+            "description": "Enables all of the jobs in the job collection.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/JobCollections_Enable.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_List": {
+            "main": "./lib/actions/Jobs_List.js",
+            "title": "Lists all jobs under the specified job collection.",
+            "description": "Lists all jobs under the specified job collection.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_Delete": {
+            "main": "./lib/actions/Jobs_Delete.js",
+            "title": "Deletes a job.",
+            "description": "Deletes a job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_Get": {
+            "main": "./lib/actions/Jobs_Get.js",
+            "title": "Gets a job.",
+            "description": "Gets a job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_Patch": {
+            "main": "./lib/actions/Jobs_Patch.js",
+            "title": "Patches an existing job.",
+            "description": "Patches an existing job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "body_content_type": {
+                    "viewClass": "SelectView",
+                    "label": "Body Content-Type",
+                    "required": true,
+                    "prompt": "Choose a body Content-Type.",
+                    "model": {
+                        "application/json": "application/json",
+                        "text/json": "text/json"
+                    }
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_Patch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_CreateOrUpdate": {
+            "main": "./lib/actions/Jobs_CreateOrUpdate.js",
+            "title": "Provisions a new job or updates an existing job.",
+            "description": "Provisions a new job or updates an existing job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "body_content_type": {
+                    "viewClass": "SelectView",
+                    "label": "Body Content-Type",
+                    "required": true,
+                    "prompt": "Choose a body Content-Type.",
+                    "model": {
+                        "application/json": "application/json",
+                        "text/json": "text/json"
+                    }
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_ListJobHistory": {
+            "main": "./lib/actions/Jobs_ListJobHistory.js",
+            "title": "Lists job history.",
+            "description": "Lists job history.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_ListJobHistory.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_Run": {
+            "main": "./lib/actions/Jobs_Run.js",
+            "title": "Runs a job.",
+            "description": "Runs a job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_Run.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

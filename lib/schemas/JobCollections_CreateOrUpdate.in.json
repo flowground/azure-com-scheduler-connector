@@ -1,0 +1,129 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "jobCollectionName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "id": {
+                    "description": "Gets the job collection resource identifier.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "location": {
+                    "description": "Gets or sets the storage account location.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Gets or sets the job collection resource name.",
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "Gets or sets the job collection properties.",
+                    "properties": {
+                        "quota": {
+                            "description": "Gets or sets the job collection quota.",
+                            "properties": {
+                                "maxJobCount": {
+                                    "description": "Gets or set the maximum job count.",
+                                    "type": "integer"
+                                },
+                                "maxJobOccurrence": {
+                                    "description": "Gets or sets the maximum job occurrence.",
+                                    "type": "integer"
+                                },
+                                "maxRecurrence": {
+                                    "description": "Gets or set the maximum recurrence.",
+                                    "properties": {
+                                        "frequency": {
+                                            "description": "Gets or sets the frequency of recurrence (second, minute, hour, day, week, month).",
+                                            "enum": [
+                                                "Minute",
+                                                "Hour",
+                                                "Day",
+                                                "Week",
+                                                "Month"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "RecurrenceFrequency"
+                                            }
+                                        },
+                                        "interval": {
+                                            "description": "Gets or sets the interval between retries.",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "sku": {
+                            "description": "Gets or sets the SKU.",
+                            "properties": {
+                                "name": {
+                                    "description": "Gets or set the SKU.",
+                                    "enum": [
+                                        "Standard",
+                                        "Free",
+                                        "P10Premium",
+                                        "P20Premium"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "SkuDefinition"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "state": {
+                            "description": "Gets or sets the state.",
+                            "enum": [
+                                "Enabled",
+                                "Disabled",
+                                "Suspended",
+                                "Deleted"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "JobCollectionState"
+                            }
+                        }
+                    }
+                },
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags.",
+                    "type": "object"
+                },
+                "type": {
+                    "description": "Gets the job collection resource type.",
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

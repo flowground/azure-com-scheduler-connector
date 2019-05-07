@@ -1,0 +1,979 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "jobCollectionName": {
+            "required": true,
+            "type": "string"
+        },
+        "jobName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "id": {
+                    "description": "Gets the job resource identifier.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Gets the job resource name.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "Gets or sets the job properties.",
+                    "properties": {
+                        "action": {
+                            "description": "Gets or sets the job action.",
+                            "properties": {
+                                "errorAction": {
+                                    "description": "Gets or sets the error action.",
+                                    "properties": {
+                                        "queueMessage": {
+                                            "description": "Gets or sets the storage queue message.",
+                                            "properties": {
+                                                "message": {
+                                                    "description": "Gets or sets the message.",
+                                                    "type": "string"
+                                                },
+                                                "queueName": {
+                                                    "description": "Gets or sets the queue name.",
+                                                    "type": "string"
+                                                },
+                                                "sasToken": {
+                                                    "description": "Gets or sets the SAS key.",
+                                                    "type": "string"
+                                                },
+                                                "storageAccount": {
+                                                    "description": "Gets or sets the storage account name.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "request": {
+                                            "description": "Gets or sets the http requests.",
+                                            "properties": {
+                                                "authentication": {
+                                                    "description": "Gets or sets the authentication method of the request.",
+                                                    "discriminator": {
+                                                        "propertyName": "type"
+                                                    },
+                                                    "properties": {
+                                                        "type": {
+                                                            "description": "Gets or sets the HTTP authentication type.",
+                                                            "enum": [
+                                                                "NotSpecified",
+                                                                "ClientCertificate",
+                                                                "ActiveDirectoryOAuth",
+                                                                "Basic"
+                                                            ],
+                                                            "type": "string",
+                                                            "x-ms-enum": {
+                                                                "modelAsString": false,
+                                                                "name": "HttpAuthenticationType"
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "type"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "body": {
+                                                    "description": "Gets or sets the request body.",
+                                                    "type": "string"
+                                                },
+                                                "headers": {
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Gets or sets the headers.",
+                                                    "type": "object"
+                                                },
+                                                "method": {
+                                                    "description": "Gets or sets the method of the request.",
+                                                    "type": "string"
+                                                },
+                                                "uri": {
+                                                    "description": "Gets or sets the URI of the request.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "retryPolicy": {
+                                            "description": "Gets or sets the retry policy.",
+                                            "properties": {
+                                                "retryCount": {
+                                                    "description": "Gets or sets the number of times a retry should be attempted.",
+                                                    "type": "integer"
+                                                },
+                                                "retryInterval": {
+                                                    "description": "Gets or sets the retry interval between retries, specify duration in ISO 8601 format.",
+                                                    "format": "duration",
+                                                    "type": "string"
+                                                },
+                                                "retryType": {
+                                                    "description": "Gets or sets the retry strategy to be used.",
+                                                    "enum": [
+                                                        "None",
+                                                        "Fixed"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "RetryType"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "serviceBusQueueMessage": {
+                                            "description": "Gets or sets the service bus queue message.",
+                                            "allOf": [
+                                                {
+                                                    "properties": {
+                                                        "authentication": {
+                                                            "description": "Gets or sets the Service Bus authentication.",
+                                                            "properties": {
+                                                                "sasKey": {
+                                                                    "description": "Gets or sets the SAS key.",
+                                                                    "type": "string"
+                                                                },
+                                                                "sasKeyName": {
+                                                                    "description": "Gets or sets the SAS key name.",
+                                                                    "type": "string"
+                                                                },
+                                                                "type": {
+                                                                    "description": "Gets or sets the authentication type.",
+                                                                    "enum": [
+                                                                        "NotSpecified",
+                                                                        "SharedAccessKey"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "x-ms-enum": {
+                                                                        "modelAsString": false,
+                                                                        "name": "ServiceBusAuthenticationType"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "brokeredMessageProperties": {
+                                                            "description": "Gets or sets the brokered message properties.",
+                                                            "properties": {
+                                                                "contentType": {
+                                                                    "description": "Gets or sets the content type.",
+                                                                    "type": "string"
+                                                                },
+                                                                "correlationId": {
+                                                                    "description": "Gets or sets the correlation ID.",
+                                                                    "type": "string"
+                                                                },
+                                                                "forcePersistence": {
+                                                                    "description": "Gets or sets the force persistence.",
+                                                                    "type": "boolean"
+                                                                },
+                                                                "label": {
+                                                                    "description": "Gets or sets the label.",
+                                                                    "type": "string"
+                                                                },
+                                                                "messageId": {
+                                                                    "description": "Gets or sets the message ID.",
+                                                                    "type": "string"
+                                                                },
+                                                                "partitionKey": {
+                                                                    "description": "Gets or sets the partition key.",
+                                                                    "type": "string"
+                                                                },
+                                                                "replyTo": {
+                                                                    "description": "Gets or sets the reply to.",
+                                                                    "type": "string"
+                                                                },
+                                                                "replyToSessionId": {
+                                                                    "description": "Gets or sets the reply to session ID.",
+                                                                    "type": "string"
+                                                                },
+                                                                "scheduledEnqueueTimeUtc": {
+                                                                    "description": "Gets or sets the scheduled enqueue time UTC.",
+                                                                    "format": "date-time",
+                                                                    "type": "string"
+                                                                },
+                                                                "sessionId": {
+                                                                    "description": "Gets or sets the session ID.",
+                                                                    "type": "string"
+                                                                },
+                                                                "timeToLive": {
+                                                                    "description": "Gets or sets the time to live.",
+                                                                    "format": "duration",
+                                                                    "type": "string"
+                                                                },
+                                                                "to": {
+                                                                    "description": "Gets or sets the to.",
+                                                                    "type": "string"
+                                                                },
+                                                                "viaPartitionKey": {
+                                                                    "description": "Gets or sets the via partition key.",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "customMessageProperties": {
+                                                            "additionalProperties": {
+                                                                "type": "string"
+                                                            },
+                                                            "description": "Gets or sets the custom message properties.",
+                                                            "type": "object"
+                                                        },
+                                                        "message": {
+                                                            "description": "Gets or sets the message.",
+                                                            "type": "string"
+                                                        },
+                                                        "namespace": {
+                                                            "description": "Gets or sets the namespace.",
+                                                            "type": "string"
+                                                        },
+                                                        "transportType": {
+                                                            "description": "Gets or sets the transport type.",
+                                                            "enum": [
+                                                                "NotSpecified",
+                                                                "NetMessaging",
+                                                                "AMQP"
+                                                            ],
+                                                            "type": "string",
+                                                            "x-ms-enum": {
+                                                                "modelAsString": false,
+                                                                "name": "ServiceBusTransportType"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            ],
+                                            "properties": {
+                                                "queueName": {
+                                                    "description": "Gets or sets the queue name.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "serviceBusTopicMessage": {
+                                            "description": "Gets or sets the service bus topic message.",
+                                            "allOf": [
+                                                {
+                                                    "properties": {
+                                                        "authentication": {
+                                                            "description": "Gets or sets the Service Bus authentication.",
+                                                            "properties": {
+                                                                "sasKey": {
+                                                                    "description": "Gets or sets the SAS key.",
+                                                                    "type": "string"
+                                                                },
+                                                                "sasKeyName": {
+                                                                    "description": "Gets or sets the SAS key name.",
+                                                                    "type": "string"
+                                                                },
+                                                                "type": {
+                                                                    "description": "Gets or sets the authentication type.",
+                                                                    "enum": [
+                                                                        "NotSpecified",
+                                                                        "SharedAccessKey"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "x-ms-enum": {
+                                                                        "modelAsString": false,
+                                                                        "name": "ServiceBusAuthenticationType"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "brokeredMessageProperties": {
+                                                            "description": "Gets or sets the brokered message properties.",
+                                                            "properties": {
+                                                                "contentType": {
+                                                                    "description": "Gets or sets the content type.",
+                                                                    "type": "string"
+                                                                },
+                                                                "correlationId": {
+                                                                    "description": "Gets or sets the correlation ID.",
+                                                                    "type": "string"
+                                                                },
+                                                                "forcePersistence": {
+                                                                    "description": "Gets or sets the force persistence.",
+                                                                    "type": "boolean"
+                                                                },
+                                                                "label": {
+                                                                    "description": "Gets or sets the label.",
+                                                                    "type": "string"
+                                                                },
+                                                                "messageId": {
+                                                                    "description": "Gets or sets the message ID.",
+                                                                    "type": "string"
+                                                                },
+                                                                "partitionKey": {
+                                                                    "description": "Gets or sets the partition key.",
+                                                                    "type": "string"
+                                                                },
+                                                                "replyTo": {
+                                                                    "description": "Gets or sets the reply to.",
+                                                                    "type": "string"
+                                                                },
+                                                                "replyToSessionId": {
+                                                                    "description": "Gets or sets the reply to session ID.",
+                                                                    "type": "string"
+                                                                },
+                                                                "scheduledEnqueueTimeUtc": {
+                                                                    "description": "Gets or sets the scheduled enqueue time UTC.",
+                                                                    "format": "date-time",
+                                                                    "type": "string"
+                                                                },
+                                                                "sessionId": {
+                                                                    "description": "Gets or sets the session ID.",
+                                                                    "type": "string"
+                                                                },
+                                                                "timeToLive": {
+                                                                    "description": "Gets or sets the time to live.",
+                                                                    "format": "duration",
+                                                                    "type": "string"
+                                                                },
+                                                                "to": {
+                                                                    "description": "Gets or sets the to.",
+                                                                    "type": "string"
+                                                                },
+                                                                "viaPartitionKey": {
+                                                                    "description": "Gets or sets the via partition key.",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "customMessageProperties": {
+                                                            "additionalProperties": {
+                                                                "type": "string"
+                                                            },
+                                                            "description": "Gets or sets the custom message properties.",
+                                                            "type": "object"
+                                                        },
+                                                        "message": {
+                                                            "description": "Gets or sets the message.",
+                                                            "type": "string"
+                                                        },
+                                                        "namespace": {
+                                                            "description": "Gets or sets the namespace.",
+                                                            "type": "string"
+                                                        },
+                                                        "transportType": {
+                                                            "description": "Gets or sets the transport type.",
+                                                            "enum": [
+                                                                "NotSpecified",
+                                                                "NetMessaging",
+                                                                "AMQP"
+                                                            ],
+                                                            "type": "string",
+                                                            "x-ms-enum": {
+                                                                "modelAsString": false,
+                                                                "name": "ServiceBusTransportType"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            ],
+                                            "properties": {
+                                                "topicPath": {
+                                                    "description": "Gets or sets the topic path.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": {
+                                            "description": "Gets or sets the job error action type.",
+                                            "enum": [
+                                                "Http",
+                                                "Https",
+                                                "StorageQueue",
+                                                "ServiceBusQueue",
+                                                "ServiceBusTopic"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "JobActionType"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "queueMessage": {
+                                    "description": "Gets or sets the storage queue message.",
+                                    "properties": {
+                                        "message": {
+                                            "description": "Gets or sets the message.",
+                                            "type": "string"
+                                        },
+                                        "queueName": {
+                                            "description": "Gets or sets the queue name.",
+                                            "type": "string"
+                                        },
+                                        "sasToken": {
+                                            "description": "Gets or sets the SAS key.",
+                                            "type": "string"
+                                        },
+                                        "storageAccount": {
+                                            "description": "Gets or sets the storage account name.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "description": "Gets or sets the http requests.",
+                                    "properties": {
+                                        "authentication": {
+                                            "description": "Gets or sets the authentication method of the request.",
+                                            "discriminator": {
+                                                "propertyName": "type"
+                                            },
+                                            "properties": {
+                                                "type": {
+                                                    "description": "Gets or sets the HTTP authentication type.",
+                                                    "enum": [
+                                                        "NotSpecified",
+                                                        "ClientCertificate",
+                                                        "ActiveDirectoryOAuth",
+                                                        "Basic"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "HttpAuthenticationType"
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "type"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "body": {
+                                            "description": "Gets or sets the request body.",
+                                            "type": "string"
+                                        },
+                                        "headers": {
+                                            "additionalProperties": {
+                                                "type": "string"
+                                            },
+                                            "description": "Gets or sets the headers.",
+                                            "type": "object"
+                                        },
+                                        "method": {
+                                            "description": "Gets or sets the method of the request.",
+                                            "type": "string"
+                                        },
+                                        "uri": {
+                                            "description": "Gets or sets the URI of the request.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "retryPolicy": {
+                                    "description": "Gets or sets the retry policy.",
+                                    "properties": {
+                                        "retryCount": {
+                                            "description": "Gets or sets the number of times a retry should be attempted.",
+                                            "type": "integer"
+                                        },
+                                        "retryInterval": {
+                                            "description": "Gets or sets the retry interval between retries, specify duration in ISO 8601 format.",
+                                            "format": "duration",
+                                            "type": "string"
+                                        },
+                                        "retryType": {
+                                            "description": "Gets or sets the retry strategy to be used.",
+                                            "enum": [
+                                                "None",
+                                                "Fixed"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "RetryType"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "serviceBusQueueMessage": {
+                                    "description": "Gets or sets the service bus queue message.",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "authentication": {
+                                                    "description": "Gets or sets the Service Bus authentication.",
+                                                    "properties": {
+                                                        "sasKey": {
+                                                            "description": "Gets or sets the SAS key.",
+                                                            "type": "string"
+                                                        },
+                                                        "sasKeyName": {
+                                                            "description": "Gets or sets the SAS key name.",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "description": "Gets or sets the authentication type.",
+                                                            "enum": [
+                                                                "NotSpecified",
+                                                                "SharedAccessKey"
+                                                            ],
+                                                            "type": "string",
+                                                            "x-ms-enum": {
+                                                                "modelAsString": false,
+                                                                "name": "ServiceBusAuthenticationType"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "brokeredMessageProperties": {
+                                                    "description": "Gets or sets the brokered message properties.",
+                                                    "properties": {
+                                                        "contentType": {
+                                                            "description": "Gets or sets the content type.",
+                                                            "type": "string"
+                                                        },
+                                                        "correlationId": {
+                                                            "description": "Gets or sets the correlation ID.",
+                                                            "type": "string"
+                                                        },
+                                                        "forcePersistence": {
+                                                            "description": "Gets or sets the force persistence.",
+                                                            "type": "boolean"
+                                                        },
+                                                        "label": {
+                                                            "description": "Gets or sets the label.",
+                                                            "type": "string"
+                                                        },
+                                                        "messageId": {
+                                                            "description": "Gets or sets the message ID.",
+                                                            "type": "string"
+                                                        },
+                                                        "partitionKey": {
+                                                            "description": "Gets or sets the partition key.",
+                                                            "type": "string"
+                                                        },
+                                                        "replyTo": {
+                                                            "description": "Gets or sets the reply to.",
+                                                            "type": "string"
+                                                        },
+                                                        "replyToSessionId": {
+                                                            "description": "Gets or sets the reply to session ID.",
+                                                            "type": "string"
+                                                        },
+                                                        "scheduledEnqueueTimeUtc": {
+                                                            "description": "Gets or sets the scheduled enqueue time UTC.",
+                                                            "format": "date-time",
+                                                            "type": "string"
+                                                        },
+                                                        "sessionId": {
+                                                            "description": "Gets or sets the session ID.",
+                                                            "type": "string"
+                                                        },
+                                                        "timeToLive": {
+                                                            "description": "Gets or sets the time to live.",
+                                                            "format": "duration",
+                                                            "type": "string"
+                                                        },
+                                                        "to": {
+                                                            "description": "Gets or sets the to.",
+                                                            "type": "string"
+                                                        },
+                                                        "viaPartitionKey": {
+                                                            "description": "Gets or sets the via partition key.",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "customMessageProperties": {
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Gets or sets the custom message properties.",
+                                                    "type": "object"
+                                                },
+                                                "message": {
+                                                    "description": "Gets or sets the message.",
+                                                    "type": "string"
+                                                },
+                                                "namespace": {
+                                                    "description": "Gets or sets the namespace.",
+                                                    "type": "string"
+                                                },
+                                                "transportType": {
+                                                    "description": "Gets or sets the transport type.",
+                                                    "enum": [
+                                                        "NotSpecified",
+                                                        "NetMessaging",
+                                                        "AMQP"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "ServiceBusTransportType"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ],
+                                    "properties": {
+                                        "queueName": {
+                                            "description": "Gets or sets the queue name.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "serviceBusTopicMessage": {
+                                    "description": "Gets or sets the service bus topic message.",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "authentication": {
+                                                    "description": "Gets or sets the Service Bus authentication.",
+                                                    "properties": {
+                                                        "sasKey": {
+                                                            "description": "Gets or sets the SAS key.",
+                                                            "type": "string"
+                                                        },
+                                                        "sasKeyName": {
+                                                            "description": "Gets or sets the SAS key name.",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "description": "Gets or sets the authentication type.",
+                                                            "enum": [
+                                                                "NotSpecified",
+                                                                "SharedAccessKey"
+                                                            ],
+                                                            "type": "string",
+                                                            "x-ms-enum": {
+                                                                "modelAsString": false,
+                                                                "name": "ServiceBusAuthenticationType"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "brokeredMessageProperties": {
+                                                    "description": "Gets or sets the brokered message properties.",
+                                                    "properties": {
+                                                        "contentType": {
+                                                            "description": "Gets or sets the content type.",
+                                                            "type": "string"
+                                                        },
+                                                        "correlationId": {
+                                                            "description": "Gets or sets the correlation ID.",
+                                                            "type": "string"
+                                                        },
+                                                        "forcePersistence": {
+                                                            "description": "Gets or sets the force persistence.",
+                                                            "type": "boolean"
+                                                        },
+                                                        "label": {
+                                                            "description": "Gets or sets the label.",
+                                                            "type": "string"
+                                                        },
+                                                        "messageId": {
+                                                            "description": "Gets or sets the message ID.",
+                                                            "type": "string"
+                                                        },
+                                                        "partitionKey": {
+                                                            "description": "Gets or sets the partition key.",
+                                                            "type": "string"
+                                                        },
+                                                        "replyTo": {
+                                                            "description": "Gets or sets the reply to.",
+                                                            "type": "string"
+                                                        },
+                                                        "replyToSessionId": {
+                                                            "description": "Gets or sets the reply to session ID.",
+                                                            "type": "string"
+                                                        },
+                                                        "scheduledEnqueueTimeUtc": {
+                                                            "description": "Gets or sets the scheduled enqueue time UTC.",
+                                                            "format": "date-time",
+                                                            "type": "string"
+                                                        },
+                                                        "sessionId": {
+                                                            "description": "Gets or sets the session ID.",
+                                                            "type": "string"
+                                                        },
+                                                        "timeToLive": {
+                                                            "description": "Gets or sets the time to live.",
+                                                            "format": "duration",
+                                                            "type": "string"
+                                                        },
+                                                        "to": {
+                                                            "description": "Gets or sets the to.",
+                                                            "type": "string"
+                                                        },
+                                                        "viaPartitionKey": {
+                                                            "description": "Gets or sets the via partition key.",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "customMessageProperties": {
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Gets or sets the custom message properties.",
+                                                    "type": "object"
+                                                },
+                                                "message": {
+                                                    "description": "Gets or sets the message.",
+                                                    "type": "string"
+                                                },
+                                                "namespace": {
+                                                    "description": "Gets or sets the namespace.",
+                                                    "type": "string"
+                                                },
+                                                "transportType": {
+                                                    "description": "Gets or sets the transport type.",
+                                                    "enum": [
+                                                        "NotSpecified",
+                                                        "NetMessaging",
+                                                        "AMQP"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "ServiceBusTransportType"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ],
+                                    "properties": {
+                                        "topicPath": {
+                                            "description": "Gets or sets the topic path.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": {
+                                    "description": "Gets or sets the job action type.",
+                                    "enum": [
+                                        "Http",
+                                        "Https",
+                                        "StorageQueue",
+                                        "ServiceBusQueue",
+                                        "ServiceBusTopic"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "JobActionType"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "recurrence": {
+                            "description": "Gets or sets the job recurrence.",
+                            "properties": {
+                                "count": {
+                                    "description": "Gets or sets the maximum number of times that the job should run.",
+                                    "type": "integer"
+                                },
+                                "endTime": {
+                                    "description": "Gets or sets the time at which the job will complete.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                },
+                                "frequency": {
+                                    "description": "Gets or sets the frequency of recurrence (second, minute, hour, day, week, month).",
+                                    "enum": [
+                                        "Minute",
+                                        "Hour",
+                                        "Day",
+                                        "Week",
+                                        "Month"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "RecurrenceFrequency"
+                                    }
+                                },
+                                "interval": {
+                                    "description": "Gets or sets the interval between retries.",
+                                    "type": "integer"
+                                },
+                                "schedule": {
+                                    "properties": {
+                                        "hours": {
+                                            "description": "Gets or sets the hours of the day that the job should execute at.",
+                                            "items": {
+                                                "type": "integer"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "minutes": {
+                                            "description": "Gets or sets the minutes of the hour that the job should execute at.",
+                                            "items": {
+                                                "type": "integer"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "monthDays": {
+                                            "description": "Gets or sets the days of the month that the job should execute on. Must be between 1 and 31.",
+                                            "items": {
+                                                "type": "integer"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "monthlyOccurrences": {
+                                            "description": "Gets or sets the occurrences of days within a month.",
+                                            "items": {
+                                                "properties": {
+                                                    "Occurrence": {
+                                                        "description": "Gets or sets the occurrence. Must be between -5 and 5.",
+                                                        "type": "integer"
+                                                    },
+                                                    "day": {
+                                                        "description": "Gets or sets the day. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.",
+                                                        "enum": [
+                                                            "Monday",
+                                                            "Tuesday",
+                                                            "Wednesday",
+                                                            "Thursday",
+                                                            "Friday",
+                                                            "Saturday",
+                                                            "Sunday"
+                                                        ],
+                                                        "type": "string",
+                                                        "x-ms-enum": {
+                                                            "modelAsString": false,
+                                                            "name": "JobScheduleDay"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "weekDays": {
+                                            "description": "Gets or sets the days of the week that the job should execute on.",
+                                            "items": {
+                                                "enum": [
+                                                    "Sunday",
+                                                    "Monday",
+                                                    "Tuesday",
+                                                    "Wednesday",
+                                                    "Thursday",
+                                                    "Friday",
+                                                    "Saturday"
+                                                ],
+                                                "type": "string",
+                                                "x-ms-enum": {
+                                                    "modelAsString": false,
+                                                    "name": "DayOfWeek"
+                                                }
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "startTime": {
+                            "description": "Gets or sets the job start time.",
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        "state": {
+                            "description": "Gets or set the job state.",
+                            "enum": [
+                                "Enabled",
+                                "Disabled",
+                                "Faulted",
+                                "Completed"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "JobState"
+                            }
+                        },
+                        "status": {
+                            "description": "Gets the job status.",
+                            "readOnly": true,
+                            "properties": {
+                                "executionCount": {
+                                    "description": "Gets the number of times this job has executed.",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "failureCount": {
+                                    "description": "Gets the number of times this job has failed.",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "faultedCount": {
+                                    "description": "Gets the number of faulted occurrences (occurrences that were retried and failed as many times as the retry policy states).",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "lastExecutionTime": {
+                                    "description": "Gets the time the last occurrence executed in ISO-8601 format.  Could be empty if job has not run yet.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "nextExecutionTime": {
+                                    "description": "Gets the time of the next occurrence in ISO-8601 format. Could be empty if the job is completed.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": {
+                    "description": "Gets the job resource type.",
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
